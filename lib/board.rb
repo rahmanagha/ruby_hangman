@@ -1,4 +1,8 @@
+require_relative "validatable"
+
 class Board
+
+  include Validatable
   
   def initialize(secret_word_length)
     @secret_word_array = Array.new(secret_word_length,"_")
@@ -11,8 +15,9 @@ class Board
   end
 
   def update_secret_word(indexes, guess)
+    return false unless valid_guess?(guess)
     indexes.each do |index|
-      @secret_word_array[index] = guess
+      @secret_word_array[index] = guess.downcase
     end
   end
 

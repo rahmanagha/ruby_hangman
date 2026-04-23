@@ -1,4 +1,9 @@
+require_relative "validatable"
+
 class SecretWord
+
+  include Validatable
+
   def initialize
     @secret_word = get_secret_word
   end
@@ -15,9 +20,5 @@ class SecretWord
       found_indexes.push(index) if guess.downcase == letter
     end
     found_indexes
-  end
-
-  def valid_guess?(guess)
-    ("a".."z").include?(guess.downcase)
   end
 end
