@@ -11,19 +11,24 @@ class Game
     board.display
 
     until board.won? || board.lost?
-      guess = player.get_guess
-      feedback = secret.give_feedback(guess)
-      if feedback == false
-        puts "Please enter a valid letter(a-z)"
-      elsif feedback.empty?
-        board.handle_incorrect_letter(guess)
-      else
-        board.update_secret_word(feedback, guess)
-      end
-      board.display
+      turn(secret, board, player)
     end
+    
     handle_win if board.won?
     handle_loss(secret) if board.lost?
+  end
+
+  def turn(secret, board, player)
+    guess = player.get_guess
+    feedback = secret.give_feedback(guess)
+    if feedback == false
+      puts "Please enter a valid letter(a-z)"
+    elsif feedback.empty?
+      board.handle_incorrect_letter(guess)
+    else
+      board.update_secret_word(feedback, guess)
+    end
+    board.display
   end
 
   def handle_win
