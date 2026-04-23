@@ -15,7 +15,8 @@ class Board
   end
 
   def update_secret_word(indexes, guess)
-    return false if !valid_guess?(guess) || already_guessed?(guess)
+    all_guesses = @secret_word_array + @incorrect_letters_array
+    return false if !valid_guess?(guess) || already_guessed?(guess, all_guesses)
     indexes.each do |index|
       @secret_word_array[index] = guess.downcase
     end
@@ -32,9 +33,4 @@ class Board
   def lost?
     @incorrect_letters_array.length > 7
   end
-
-  def already_guessed?(letter)
-    @secret_word_array.include?(letter.downcase) || @incorrect_letters_array.include?(letter.downcase)
-  end
-
 end
