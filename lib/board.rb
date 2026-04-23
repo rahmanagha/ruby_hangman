@@ -3,11 +3,9 @@ class Board
   def initialize(secret_word_length)
     @secret_word_array = Array.new(secret_word_length,"_")
     @incorrect_guesses_array = []
-    @turn = 0
   end
 
   def display
-    puts "Turn #{@turn}"
     puts @secret_word_array.join
     puts "Incorrect guesses: #{@incorrect_guesses_array.join(", ")}"
   end
@@ -18,11 +16,15 @@ class Board
     end
   end
 
-  def increment_turn
-    @turn += 1
-  end
-
   def handle_incorrect_guess(guess)
     @incorrect_guesses_array.push(guess)
+  end
+
+  def won?
+    !@secret_word_array.include?("_")
+  end
+
+  def lost?
+    @incorrect_guesses_array.length > 7
   end
 end
