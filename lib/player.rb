@@ -10,6 +10,7 @@ class Player
 
   def get_guess
     puts "Enter a letter(a-z): "
+    input = nil
     loop do
       input = gets.chomp
       if valid_guess?(input) && !already_guessed?(input, @guesses)
