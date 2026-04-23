@@ -2,6 +2,8 @@ require_relative "validatable"
 
 class SecretWord
 
+  attr_reader :secret_word
+
   include Validatable
 
   def initialize
