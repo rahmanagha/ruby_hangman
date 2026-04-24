@@ -5,13 +5,18 @@ require "yaml"
 
 class Game
 
+  def initialize
+    @game_over = false
+  end
+
   def play
     secret = SecretWord.new
     board = Board.new(secret.secret_word.length)
     player = Player.new
+    @game_over = false
     board.display
 
-    until board.won? || board.lost?
+    until board.won? || board.lost? || @game_over
       turn(secret, board, player)
     end
     
@@ -28,6 +33,10 @@ class Game
     end
     if guess == "save"
       handle_save(secret, board, player)
+      return
+    end
+    if guess == "quit"
+      handle_quit(secret, board, player)
       return
     end
     feedback = secret.give_feedback(guess)
@@ -54,6 +63,13 @@ class Game
     File.open(file_path, "w+") do |f|
       f.write(to_yaml(secret, board, player))
     end
+  end
+
+  def  handle_quit(secret, board, player)
+    puts "Would you like to save the game? (y/n)"
+    answer = gets.chomp.downcase
+    handle_save(secret, board, player) if answer == "y"
+    @game_over = true
   end
 
   def to_yaml(secret, board, player)
