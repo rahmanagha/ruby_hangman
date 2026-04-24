@@ -1,6 +1,7 @@
 require_relative "board"
 require_relative "secret_word"
 require_relative "player"
+require "yaml"
 
 class Game
 
@@ -25,6 +26,10 @@ class Game
       board.display
       return
     end
+    if guess == "save"
+      handle_save(secret, board, player)
+      return
+    end
     feedback = secret.give_feedback(guess)
     handle_feedback(feedback, board, guess)
     board.display
@@ -38,6 +43,25 @@ class Game
     else
       board.update_secret_word(feedback, guess)
     end
+  end
+
+  def handle_save(secret, board, player)
+    puts "Enter saved file name:"
+    name = gets.chomp
+    save_path = File.join(__dir__, "..", "saves")
+    Dir.mkdir(save_path) unless Dir.exist?(save_path)
+    file_path = File.join(save_path, "#{name}.yaml")
+    File.open(file_path, "w+") do |f|
+      f.write(to_yaml(secret, board, player))
+    end
+  end
+
+  def to_yaml(secret, board, player)
+    YAML.dump ({
+      :secret => secret,
+      :board => board,
+      :player => player
+    })
   end
 
   def handle_win

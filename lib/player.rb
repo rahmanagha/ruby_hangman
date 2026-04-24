@@ -13,7 +13,7 @@ class Player
     input = nil
     loop do
       input = gets.chomp.downcase
-      break if check_full_word(input)
+      break if check_for_key_word(input)
       if valid_guess?(input) && !already_guessed?(input, @guesses)
         @guesses.push(input.downcase)
         break
@@ -23,7 +23,7 @@ class Player
     input.downcase
   end
 
-  def check_full_word(input)
-    input == "solve"
+  def check_for_key_word(input)
+    input == "solve" || input == "save"
   end
 end
