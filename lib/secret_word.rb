@@ -6,8 +6,12 @@ class SecretWord
 
   include Validatable
 
-  def initialize
-    @secret_word = get_secret_word
+  def initialize(secret = get_secret_word)
+    @secret_word = secret
+  end
+
+  def self.from_yaml(secret)
+    self.new(secret)
   end
 
   def get_secret_word
