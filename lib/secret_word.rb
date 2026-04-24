@@ -24,4 +24,8 @@ class SecretWord
     end
     found_indexes
   end
+
+  def check_full_word(guess)
+    guess == @secret_word
+  end
 end
