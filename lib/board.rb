@@ -70,9 +70,13 @@ class Board
 
   include Validatable
 
-  def initialize(secret_word_length)
+  def initialize(secret_word_length, incorrect_letters_array = [])
     @secret_word_array = Array.new(secret_word_length,"_")
-    @incorrect_letters_array = []
+    @incorrect_letters_array = incorrect_letters_array
+  end
+
+  def self.from_yaml(secret_word_length, incorrect_letters_array)
+    self.new(secret_word_length, incorrect_letters_array)
   end
 
   def display
