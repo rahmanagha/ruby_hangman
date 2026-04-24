@@ -42,7 +42,7 @@ class Game
 
   def handle_full_word(secret, board)
     puts "Predict full word:"
-    answer = gets.chomp
+    answer = gets.chomp.downcase
     if secret.check_full_word(answer)
       board.update_to_full_word(answer)
     else
