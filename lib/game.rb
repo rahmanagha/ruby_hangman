@@ -9,10 +9,7 @@ class Game
     @game_over = false
   end
 
-  def play
-    secret = SecretWord.new
-    board = Board.new(secret.secret_word.length)
-    player = Player.new
+  def play(secret, board, player)
     @game_over = false
     board.display
 
@@ -23,6 +20,17 @@ class Game
     handle_win if board.won?
     handle_loss(secret) if board.lost?
   end
+
+   def new_game
+    secret = SecretWord.new
+    board = Board.new(secret.secret_word.length)
+    player = Player.new
+    play(secret, board, player)
+   end
+
+   def continue(secret, board, player)
+    play(secret, board, player)
+   end
 
   def turn(secret, board, player)
     guess = player.get_guess
@@ -56,7 +64,7 @@ class Game
 
   def handle_save(secret, board, player)
     puts "Enter saved file name:"
-    name = gets.chomp
+    name = gets.chomp.downcase
     save_path = File.join(__dir__, "..", "saves")
     Dir.mkdir(save_path) unless Dir.exist?(save_path)
     file_path = File.join(save_path, "#{name}.yaml")
