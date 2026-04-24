@@ -2,6 +2,8 @@ require_relative "validatable"
 
 class Player
 
+  KEY_WORDS = ["solve", "save", "quit"]
+
   include Validatable
 
   def initialize
@@ -20,10 +22,10 @@ class Player
       end
       puts "Invalid input! Please enter a letter(a-z)"
     end
-    input.downcase
+    input
   end
 
   def check_for_key_word(input)
-    input == "solve" || input == "save"
+    KEY_WORDS.include?(input)
   end
 end
