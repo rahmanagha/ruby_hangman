@@ -32,11 +32,11 @@ class Game
   end
 
   def handle_win
-    puts "Congratulations, you guessed correctly!"
+    puts "You won, but I will get him next time"
   end
 
   def handle_loss(secret)
-    puts "You run out of guesses."
+    puts "I got him"
     puts "Secret word was #{secret.secret_word}"
   end
 end
