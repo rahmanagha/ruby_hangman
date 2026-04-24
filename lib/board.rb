@@ -78,7 +78,7 @@ class Board
   def display
     puts HANGMANPICS[@incorrect_letters_array.length]
     puts "Word: #{@secret_word_array.join(" ")}"
-    puts "Incorrect letters: #{@incorrect_letters_array.join(", ")}"
+    puts "Incorrect letters: #{@incorrect_letters_array.join(", ")}  #{@incorrect_letters_array.length}/8"
   end
 
   def update_secret_word(indexes, guess)
