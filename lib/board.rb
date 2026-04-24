@@ -89,6 +89,16 @@ class Board
     end
   end
 
+  def update_to_full_word(guess)
+    @secret_word_array.each_with_index do |letter, index|
+      @secret_word_array[index] = guess[index]
+    end
+  end
+
+  def fill_incorrect_letter_array
+    @incorrect_letters_array.fill(nil, @incorrect_letters_array.length...8)
+  end
+
   def handle_incorrect_letter(guess)
     @incorrect_letters_array.push(guess)
   end
