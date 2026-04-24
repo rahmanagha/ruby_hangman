@@ -26,6 +26,11 @@ class Game
       return
     end
     feedback = secret.give_feedback(guess)
+    handle_feedback(feedback, board, guess)
+    board.display
+  end
+
+  def handle_feedback(feedback, board, guess)
     if feedback == false
       puts "Please enter a valid letter(a-z)"
     elsif feedback.empty?
@@ -33,7 +38,6 @@ class Game
     else
       board.update_secret_word(feedback, guess)
     end
-    board.display
   end
 
   def handle_win
