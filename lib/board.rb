@@ -2,14 +2,81 @@ require_relative "validatable"
 
 class Board
 
+  HANGMANPICS = ['', '
+      ┌───┐     
+          |  
+          |
+          |
+          |
+          |
+    ══════╧══ ', '
+      ┌───┐     
+          |  
+      O   |
+          |
+          |
+          |
+    ══════╧══
+  ', '
+      ┌───┐     
+          |  
+      O   |
+      ║   |
+          |
+          |
+    ══════╧══
+  ', '
+      ┌───┐     
+          |  
+      O   |
+      ║\  |
+          |
+          |
+    ══════╧══
+  ', '
+      ┌───┐     
+          |  
+      O   |
+     /║\  |
+          |
+          |
+    ══════╧══
+    ','
+      ┌───┐     
+          |  
+      O   |
+     /║\  |
+       \  |
+          |
+    ══════╧══
+    ','
+      ┌───┐     
+          |  
+      O   |
+     /║\  |
+     / \  |
+          |
+    ══════╧══
+    ','
+      ┌───┐     
+      |   |  
+      O   |
+     /║\  |
+     / \  |
+          |
+    ══════╧══
+    '
+  ]
+
   include Validatable
-  
+
   def initialize(secret_word_length)
     @secret_word_array = Array.new(secret_word_length,"_")
     @incorrect_letters_array = []
   end
 
   def display
+    puts HANGMANPICS[@incorrect_letters_array.length]
     puts "Word: #{@secret_word_array.join(" ")}"
     puts "Incorrect letters: #{@incorrect_letters_array.join(", ")}"
   end
