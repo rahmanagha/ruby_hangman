@@ -10,10 +10,12 @@ puts
 puts "HOW TO PLAY"
 puts "  • Enter a single letter (a‑z) each turn to see if it's in the word."
 puts "  • You can make up to 8 wrong guesses before the hangman is complete."
-puts "  • Type 'solve' (instead of a letter) to guess the whole word."
-puts "    - Correct: you win instantly!"
-puts "    - Wrong:   you lose immediately."
+puts "  • Special commands (type them instead of a letter):"
+puts "     solve  – guess the whole word (win instantly if correct, lose if wrong)"
+puts "     save   – save your current game to a file"
+puts "     quit   – exit with the option to save first"
 puts "  • Duplicate guesses won't cost you a turn."
+puts "  • At the start, you'll be able to resume a previously saved game."
 puts
 puts "Good luck!"
 puts
