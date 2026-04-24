@@ -6,8 +6,12 @@ class Player
 
   include Validatable
 
-  def initialize
-    @guesses = []
+  def initialize(guesses = [])
+    @guesses = guesses
+  end
+
+  def self.from_yaml(guesses)
+    self.new(guesses)
   end
 
   def get_guess
