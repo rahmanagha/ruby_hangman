@@ -79,6 +79,13 @@ class Board
     self.new(secret_word_length, incorrect_letters_array)
   end
 
+  def to_hash
+    {
+      :secret_word_array => @secret_word_array,
+      :incorrect_letters_array => @incorrect_letters_array
+    }
+  end
+
   def display
     puts HANGMANPICS[@incorrect_letters_array.length]
     puts "Word: #{@secret_word_array.join(" ")}"

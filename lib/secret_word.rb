@@ -14,6 +14,10 @@ class SecretWord
     self.new(secret)
   end
 
+  def to_hash
+    {:secret_word => @secret_word}
+  end
+
   def get_secret_word
     words_path = File.join(__dir__, 'google-10000-english-words.txt')
     words = File.readlines(words_path, chomp: true)

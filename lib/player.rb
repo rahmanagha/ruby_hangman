@@ -14,6 +14,10 @@ class Player
     self.new(guesses)
   end
 
+  def to_hash
+    {:guesses => @guesses}
+  end
+
   def get_guess
     puts "Enter a letter(a-z): "
     input = nil
