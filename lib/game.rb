@@ -9,6 +9,23 @@ class Game
     @game_over = false
   end
 
+  
+  def new_game
+    secret = SecretWord.new
+    board = Board.new_game(secret.secret_word.length)
+    player = Player.new
+    play(secret, board, player)
+  end
+  
+  def continue(secret, board, player)
+    saved_secret = SecretWord.from_yaml(secret[:secret_word])
+    saved_board = Board.from_yaml(board[:secret_word_array], board[:incorrect_letters_array])
+    saved_player = Player.from_yaml(player[:guesses])
+    play(saved_secret, saved_board, saved_player)
+  end
+
+  private
+
   def play(secret, board, player)
     @game_over = false
     board.display
@@ -20,21 +37,7 @@ class Game
     handle_win if board.won?
     handle_loss(secret) if board.lost?
   end
-
-   def new_game
-    secret = SecretWord.new
-    board = Board.new_game(secret.secret_word.length)
-    player = Player.new
-    play(secret, board, player)
-   end
-
-   def continue(secret, board, player)
-    saved_secret = SecretWord.from_yaml(secret[:secret_word])
-    saved_board = Board.from_yaml(board[:secret_word_array], board[:incorrect_letters_array])
-    saved_player = Player.from_yaml(player[:guesses])
-    play(saved_secret, saved_board, saved_player)
-   end
-
+  
   def turn(secret, board, player)
     guess = player.get_guess
     return if guess_is_keyword?(guess, secret, board, player)
