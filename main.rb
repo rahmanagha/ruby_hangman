@@ -27,9 +27,7 @@ def load_saved_game(saved_files, game, save_path)
     if saved_files.include?("#{file_name}.yaml")
       saved_game = YAML.load_file("#{save_path}/#{file_name}.yaml")
       game.continue(saved_game[:secret], saved_game[:board], saved_game[:player])
-      puts "Would you like to play again? (y/n)"
-      answer = gets.chomp
-      return false unless answer.downcase == "y"
+      return false unless play_again?
       break
     end
     puts "Please enter a valid file name!"
@@ -37,11 +35,15 @@ def load_saved_game(saved_files, game, save_path)
   true
 end
 
-def play_new_game(game)
-  game.new_game
+def play_again?
   puts "Would you like to play again? (y/n)"
   answer = gets.chomp
   answer.downcase == "y"
+end
+
+def play_new_game(game)
+  game.new_game
+  play_again?
 end
 
 def find_saved_files(save_path)
