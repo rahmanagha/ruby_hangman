@@ -15,6 +15,7 @@ This project is part of [The Odin Project](https://www.theodinproject.com/) Ruby
   - Visual hangman progression (9 stages) displayed after each wrong guess.
   - Duplicate guess detection—no wasted turns.
   - Case‑insensitive input handling.
+  - Terminal clears between turns to reduce visual clutter and focus attention.
 
 ## ▶️ How to Play
 
