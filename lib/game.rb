@@ -66,6 +66,7 @@ class Game
     else
       board.update_secret_word(feedback, guess)
     end
+    system("clear") || system("cls") if feedback
   end
 
   def handle_save(secret, board, player)
