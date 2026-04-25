@@ -18,12 +18,6 @@ class SecretWord
     {:secret_word => @secret_word}
   end
 
-  def get_secret_word
-    words_path = File.join(__dir__, 'google-10000-english-words.txt')
-    words = File.readlines(words_path, chomp: true)
-    words.select { |word| word.length.between?(5, 12) }.sample
-  end
-
   def give_feedback(guess)
     return false unless valid_guess?(guess)
     found_indexes = []
@@ -35,5 +29,13 @@ class SecretWord
 
   def check_full_word(guess)
     guess == @secret_word
+  end
+
+  private
+
+  def get_secret_word
+    words_path = File.join(__dir__, 'google-10000-english-words.txt')
+    words = File.readlines(words_path, chomp: true)
+    words.select { |word| word.length.between?(5, 12) }.sample
   end
 end
