@@ -37,22 +37,25 @@ class Game
 
   def turn(secret, board, player)
     guess = player.get_guess
-    if guess == "solve"
-      handle_full_word(secret, board)
-      board.display
-      return
-    end
-    if guess == "save"
-      handle_save(secret, board, player)
-      return
-    end
-    if guess == "quit"
-      handle_quit(secret, board, player)
-      return
-    end
+    return if guess_is_keyword?(guess, secret, board, player)
     feedback = secret.give_feedback(guess)
     handle_feedback(feedback, board, guess)
     board.display
+  end
+
+  def guess_is_keyword?(guess, secret, board, player)
+    case guess
+    when "solve"
+      handle_full_word(secret, board)
+      board.display
+    when "save"
+      handle_save(secret, board, player)
+    when "quit"
+      handle_quit(secret, board, player)
+    else
+      return false
+    end
+    true
   end
 
   def handle_feedback(feedback, board, guess)
