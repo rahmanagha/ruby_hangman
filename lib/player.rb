@@ -33,6 +33,8 @@ class Player
     input
   end
 
+  private
+
   def check_for_key_word(input)
     KEY_WORDS.include?(input)
   end
