@@ -70,13 +70,18 @@ class Board
 
   include Validatable
 
-  def initialize(secret_word_length, incorrect_letters_array = [])
-    @secret_word_array = Array.new(secret_word_length,"_")
+  def initialize(secret_word_array, incorrect_letters_array = [])
+    @secret_word_array = secret_word_array
     @incorrect_letters_array = incorrect_letters_array
   end
 
-  def self.from_yaml(secret_word_length, incorrect_letters_array)
-    self.new(secret_word_length, incorrect_letters_array)
+  def self.from_yaml(secret_word_array, incorrect_letters_array)
+    self.new(secret_word_array, incorrect_letters_array)
+  end
+
+  def self.new_game(word_length)
+    new_word_array = Array.new(word_length, "_")
+    Board.new(new_word_array)
   end
 
   def to_hash

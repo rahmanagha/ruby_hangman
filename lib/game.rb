@@ -23,13 +23,16 @@ class Game
 
    def new_game
     secret = SecretWord.new
-    board = Board.new(secret.secret_word.length)
+    board = Board.new_game(secret.secret_word.length)
     player = Player.new
     play(secret, board, player)
    end
 
    def continue(secret, board, player)
-    play(secret, board, player)
+    saved_secret = SecretWord.from_yaml(secret[:secret_word])
+    saved_board = Board.from_yaml(board[:secret_word_array], board[:incorrect_letters_array])
+    saved_player = Player.from_yaml(player[:guesses])
+    play(saved_secret, saved_board, saved_player)
    end
 
   def turn(secret, board, player)
@@ -82,9 +85,9 @@ class Game
 
   def to_yaml(secret, board, player)
     YAML.dump ({
-      :secret => secret,
-      :board => board,
-      :player => player
+      :secret => secret.to_hash,
+      :board => board.to_hash,
+      :player => player.to_hash
     })
   end
 
