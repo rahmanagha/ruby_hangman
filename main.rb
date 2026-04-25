@@ -44,6 +44,15 @@ def play_new_game(game)
   answer.downcase == "y"
 end
 
+def find_saved_files(save_path)
+  Dir["#{save_path}/*.yaml"].map {|item| item.split("/").last}
+end
+
+def display_saved_files(saved_files)
+  puts "Saved files: #{saved_files.join(", ")}"
+end
+
+
 game = Game.new
 save_path = File.join(__dir__, "saves")
 loop do
@@ -51,8 +60,8 @@ loop do
     puts "Do you want to continue playing saved game? (y/n)"
     input = gets.chomp
     if input.downcase == "y"
-      saved_files = Dir["#{save_path}/*.yaml"].map {|item| item.split("/").last}
-      puts "Saved files: #{saved_files.join(", ")}"
+      saved_files = find_saved_files(save_path)
+      display_saved_files(saved_files)
       break unless load_saved_game(saved_files, game, save_path)
     else
       break unless play_new_game(game)
