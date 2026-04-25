@@ -25,7 +25,7 @@ def load_saved_game(saved_files, game, save_path)
     puts "Write the name of save you want play without extension(.yaml)"
     file_name = gets.chomp.downcase
     if saved_files.include?("#{file_name}.yaml")
-      saved_game = YAML.unsafe_load_file("#{save_path}/#{file_name}.yaml")
+      saved_game = YAML.load_file("#{save_path}/#{file_name}.yaml")
       game.continue(saved_game[:secret], saved_game[:board], saved_game[:player])
       puts "Would you like to play again? (y/n)"
       answer = gets.chomp
